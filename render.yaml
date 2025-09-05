@@ -1,12 +1,9 @@
 services:
   - type: web
     name: notes-backend
-    env: java
+    env: docker
     plan: free
-    buildCommand: ./mvnw -B -DskipTests package
-    startCommand: java -jar target/notes-api-0.0.1-SNAPSHOT.jar
+    dockerfilePath: ./Dockerfile
     envVars:
-      - key: JAVA_VERSION
-        value: 17
       - key: CORS_ALLOWED_ORIGIN
-        value: "https://notes-frontend-two-sable.vercel.app/"   # later replace with your frontend domain
+        value: "https://notes-frontend-two-sable.vercel.app/"
