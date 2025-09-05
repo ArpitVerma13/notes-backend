@@ -9,4 +9,4 @@ services:
       - key: JAVA_VERSION
         value: 17
       - key: CORS_ALLOWED_ORIGIN
-        value: "https://vercel.com/arpit-vermas-projects-ab65e9dd/notes-frontend"   # later replace with your frontend domain
+        value: "https://notes-frontend-two-sable.vercel.app/"   # later replace with your frontend domain
