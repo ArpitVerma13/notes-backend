@@ -15,10 +15,11 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                            "https://notes-frontend-3oy8rx6xn-arpit-vermas-projects-ab65e9dd.vercel.app"  // your Vercel frontend URL
+                                "https://notes-frontend-3oy8rx6xn-arpit-vermas-projects-ab65e9dd.vercel.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowCredentials(false);
+                        .allowedHeaders("*")
+                        .allowCredentials(true); // important if you send cookies or auth headers
             }
         };
     }

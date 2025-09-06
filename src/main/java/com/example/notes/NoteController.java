@@ -14,8 +14,8 @@ public class NoteController {
 
     private final NoteRepository repo;
 
-    @Value("${app.cors.allowedOrigin:*}")
-    private String allowedOrigin;
+    // @Value("${app.cors.allowedOrigin:*}")
+    // private String allowedOrigin;
 
     public NoteController(NoteRepository repo) {
         this.repo = repo;
@@ -27,13 +27,13 @@ public class NoteController {
         return "OK";
     }
 
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @GetMapping("/notes")
     public List<Note> all() {
         return repo.findAll();
     }
 
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @PostMapping("/notes")
     public ResponseEntity<Note> create(@RequestBody NoteDto dto) {
         Note n = new Note();
@@ -44,13 +44,13 @@ public class NoteController {
         return ResponseEntity.created(location).body(saved);
     }
 
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @GetMapping("/notes/{id}")
     public ResponseEntity<Note> one(@PathVariable Long id) {
         return repo.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @PutMapping("/notes/{id}")
     public ResponseEntity<Note> update(@PathVariable Long id, @RequestBody NoteDto dto) {
         return repo.findById(id).map(existing -> {
@@ -60,7 +60,7 @@ public class NoteController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @DeleteMapping("/notes/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (repo.existsById(id)) {
@@ -71,7 +71,7 @@ public class NoteController {
     }
 
     // Enable sharing for a note: generate a publicId (idempotent)
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @PostMapping("/notes/{id}/share")
     public ResponseEntity<String> share(@PathVariable Long id) {
         return repo.findById(id).map(n -> {
@@ -84,7 +84,7 @@ public class NoteController {
     }
 
     // Public endpoint to fetch shared note (no auth)
-    @CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     @GetMapping("/share/{publicId}")
     public ResponseEntity<Note> shared(@PathVariable String publicId) {
         return repo.findByPublicId(publicId).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
